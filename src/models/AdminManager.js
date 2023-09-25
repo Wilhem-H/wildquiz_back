@@ -8,14 +8,14 @@ class AdminManager extends AbstractManager {
   insert(admin) {
     return this.database.query(
       `insert into ${this.table} (email, password) values (?, ?)`,
-      [admin.email, admin.password]
+      [admin.email, admin.hashedPassword]
     );
   }
 
   update(admin, id) {
     return this.database.query(
       `update ${this.table} set email = ?, password = ? where id = ?`,
-      [admin.email, admin.password, id]
+      [admin.email, admin.hashedPassword, id]
     );
   }
 }
