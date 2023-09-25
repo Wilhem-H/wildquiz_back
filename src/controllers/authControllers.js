@@ -7,7 +7,7 @@ const getPlayerByEmailWithPasswordAndPassToNext = (req, res, next) => {
       const playerInDatabase = rows[0];
       if (playerInDatabase == null) {
         console.error("User not found");
-        res.sendStatus(422);
+        res.status(422).json("user not found");
       } else {
         req.user = playerInDatabase;
         next();

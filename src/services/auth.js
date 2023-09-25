@@ -31,7 +31,7 @@ const verifyPassword = (req, res) => {
         const payload = { sub: req.user.id };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
-          expiresIn: "3h",
+          expiresIn: "1h",
         });
 
         res.cookie("auth_token", token, {
@@ -50,4 +50,8 @@ const verifyPassword = (req, res) => {
     });
 };
 
-module.exports = { hashPassword, verifyPassword };
+const logout = (req, res) => {
+  res.clearCookie("auth_token").json("logout").status(200);
+};
+
+module.exports = { hashPassword, verifyPassword, logout };
