@@ -1,4 +1,5 @@
 const argon2 = require("argon2");
+const jwt = require("jsonwebtoken");
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -27,7 +28,18 @@ const verifyPassword = (req, res) => {
     .verify(req.user.password, req.body.password)
     .then((isVerified) => {
       if (isVerified) {
-        res.send("Credentials are valid");
+        const payload = { sub: req.user.id };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+          expiresIn: "3h",
+        });
+
+        res.cookie("auth_token", token, {
+          secure: process.env.NODE_ENV !== "development",
+          httpOnly: true,
+        });
+        delete req.user.password;
+        res.status(200).json({ user: req.user });
       } else {
         res.sendStatus(401);
       }
