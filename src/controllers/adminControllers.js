@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.player
+  models.admin
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -14,7 +14,7 @@ const browse = (req, res) => {
 
 const read = (req, res) => {
   const id = parseInt(req.params.id);
-  models.player
+  models.admin
     .find(id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -30,14 +30,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const myPlayer = req.body;
+  const myAdmin = req.body;
 
   // TODO validations (length, format...)
 
   const id = parseInt(req.params.id, 10);
 
-  models.player
-    .update(myPlayer, id)
+  models.admin
+    .update(myAdmin, id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -52,12 +52,12 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const newPlayer = req.body;
+  const newAdmin = req.body;
 
   // TODO validations (length, format...)
 
-  models.player
-    .insert(newPlayer)
+  models.admin
+    .insert(newAdmin)
     .then(([result]) => {
       res.location(`/items/${result.insertId}`).sendStatus(201);
     })
@@ -68,7 +68,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.player
+  models.admin
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
