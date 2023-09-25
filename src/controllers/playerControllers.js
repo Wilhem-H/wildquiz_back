@@ -52,12 +52,12 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const item = req.body;
+  const players = req.body;
 
   // TODO validations (length, format...)
 
-  models.item
-    .insert(item)
+  models.player
+    .insert(players)
     .then(([result]) => {
       res.location(`/items/${result.insertId}`).sendStatus(201);
     })
@@ -68,7 +68,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.item
+  models.player
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
