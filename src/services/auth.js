@@ -41,7 +41,7 @@ const verifyPassword = (req, res) => {
         delete req.user.password;
         res.status(200).json({ user: req.user });
       } else {
-        res.sendStatus(401);
+        res.status(401).json({ message: "password is incorrect" });
       }
     })
     .catch((err) => {

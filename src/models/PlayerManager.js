@@ -8,14 +8,14 @@ class PlayerManager extends AbstractManager {
   insert(player) {
     return this.database.query(
       `insert into ${this.table} (email, password, pseudo, score) values (?, ?, ?, ?)`,
-      [player.email, player.hashedPassword, player.pseudo, player.score]
+      [player.email, player.hashedPassword, player.pseudo, 0]
     );
   }
 
   update(player, id) {
     return this.database.query(
-      `update ${this.table} set email = ?, password = ?, pseudo = ?, score = ? where id = ?`,
-      [player.email, player.hashedPassword, player.pseudo, player.score, id]
+      `update ${this.table} set email = ?, pseudo = ?, score = ? where id = ?`,
+      [player.email, player.pseudo, player.score, id]
     );
   }
 }

@@ -10,7 +10,7 @@ const { hashPassword, verifyPassword, logout } = require("./services/auth.js");
 // route for player
 router.get("/player", playerControllers.browse);
 router.get("/player/:id", playerControllers.read);
-router.put("/player/:id", hashPassword, playerControllers.edit);
+router.put("/player/:id", playerControllers.edit);
 router.post("/player", hashPassword, playerControllers.add);
 router.delete("/player/:id", playerControllers.destroy);
 router.post(
@@ -22,7 +22,7 @@ router.post(
 // route for admin
 router.get("/admin", adminControllers.browse);
 router.get("/admin/:id", adminControllers.read);
-router.put("/admin/:id", hashPassword, adminControllers.edit);
+router.put("/admin/:id", adminControllers.edit);
 router.post("/admin", hashPassword, adminControllers.add);
 router.delete("/admin/:id", adminControllers.destroy);
 router.post(
