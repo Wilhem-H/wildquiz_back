@@ -26,7 +26,7 @@ const getAdminByEmailWithPasswordAndPassToNext = (req, res, next) => {
       const userInDatabase = rows[0];
       if (userInDatabase == null) {
         console.error("User not found");
-        res.sendStatus(422);
+        res.status(422).json("User not found");
       } else {
         req.user = userInDatabase;
         next();
